@@ -16,7 +16,7 @@ from typing import Optional, Tuple
 
 import tensorflow as tf
 
-import gpflow
+from ..likelihoods import likelihoods
 from ..kernels import Kernel
 from ..logdensities import multivariate_normal
 from ..mean_functions import MeanFunction
@@ -45,7 +45,7 @@ class GPR(GPModel):
         mean_function: Optional[MeanFunction] = None,
         noise_variance: float = 1.0,
     ):
-        likelihood = gpflow.likelihoods.Gaussian(noise_variance)
+        likelihood = likelihoods.Gaussian(noise_variance)
         _, Y_data = data
         super().__init__(kernel, likelihood, mean_function, num_latent_gps=Y_data.shape[-1])
         self.data = data

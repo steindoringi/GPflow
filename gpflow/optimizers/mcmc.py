@@ -16,7 +16,7 @@ from typing import Callable, Sequence, Optional, TypeVar
 
 import tensorflow as tf
 
-from gpflow.base import Parameter
+from ..base import Parameter
 
 __all__ = ["SamplingHelper"]
 

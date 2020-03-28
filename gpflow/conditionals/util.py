@@ -66,6 +66,8 @@ def base_conditional(
         shape_constraints.append(
             (q_sqrt, (["M", "R"] if q_sqrt.shape.ndims == 2 else ["R", "M", "M"]))
         )
+
+    """
     tf.debugging.assert_shapes(
         shape_constraints,
         message="base_conditional() arguments "
@@ -73,6 +75,7 @@ def base_conditional(
         "representation of Kmn. See the docs for the actual expected "
         "shape.]",
     )
+    """
 
     leading_dims = tf.shape(Kmn)[:-2]
     Lm = tf.linalg.cholesky(Kmm)  # [M, M]
@@ -129,7 +132,7 @@ def base_conditional(
         (fmean, [..., "N", "R"]),
         (fvar, [..., "R", "N", "N"] if full_cov else [..., "N", "R"]),
     ]
-    tf.debugging.assert_shapes(shape_constraints, message="base_conditional() return values")
+    #tf.debugging.assert_shapes(shape_constraints, message="base_conditional() return values")
 
     return fmean, fvar
 

@@ -16,7 +16,7 @@ from typing import Optional
 import numpy as np
 import tensorflow as tf
 
-from gpflow.kernels import Kernel
+from ..kernels import Kernel
 from .. import likelihoods
 from ..config import default_float, default_jitter
 from ..covariances.dispatch import Kuf, Kuu

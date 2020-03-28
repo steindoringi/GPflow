@@ -17,8 +17,6 @@ from typing import Optional
 import numpy as np
 import tensorflow as tf
 
-import gpflow
-
 from ..base import Parameter
 from ..conditionals import conditional
 from ..config import default_float, default_jitter
@@ -26,7 +24,7 @@ from ..kernels import Kernel
 from ..kullback_leiblers import gauss_kl
 from ..likelihoods import Likelihood
 from ..mean_functions import MeanFunction, Zero
-from ..utilities import triangular
+from ..utilities import triangular, positive
 from .model import GPModel, InputData, RegressionData, MeanAndVariance
 
 
@@ -165,7 +163,7 @@ class VGPOpperArchambeau(GPModel):
         self.num_data = X_data.shape[0]
         self.q_alpha = Parameter(np.zeros((self.num_data, self.num_latent_gps)))
         self.q_lambda = Parameter(
-            np.ones((self.num_data, self.num_latent_gps)), transform=gpflow.utilities.positive()
+            np.ones((self.num_data, self.num_latent_gps)), transform=positive()
         )
 
     def log_likelihood(self) -> tf.Tensor:
